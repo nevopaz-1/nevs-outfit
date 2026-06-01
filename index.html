@@ -467,18 +467,89 @@
   </div>
 </div>
 
-<!-- ===================== PAGE: EXPORT ===================== -->
+<!-- ===================== PAGE: DATA ===================== -->
 <div class="page" id="page-export">
+
+  <!-- טבלת על -->
   <div class="card">
-    <div class="card-title">📊 ייצוא נתונים לאקסל</div>
-    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:14px;">ייצא את כל הנתונים לקובץ CSV שאפשר לפתוח באקסל</p>
+    <div class="card-title">📊 טבלת על — כל הנתונים</div>
+    <div style="overflow-x:auto;">
+      <table id="mainTable" style="border-collapse:collapse;min-width:700px;width:100%;font-size:11px;">
+        <thead>
+          <tr style="background:var(--card2);">
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">תאריך</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">יום</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">משקל בוקר</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">משקל ערב</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">כוח בוקר</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">כוח ערב</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">אירובי</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">שתיית מים</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">דמיון</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">ביס ושאלה</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">ללא קמח ואלכוהול</th>
+            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">שליחת הצלחות</th>
+          </tr>
+        </thead>
+        <tbody id="mainTableBody"><tr><td colspan="12" style="padding:12px;text-align:center;color:var(--muted);">טוען...</td></tr></tbody>
+      </table>
+      <div style="color:var(--muted);font-size:10px;margin-top:4px;text-align:left;">← גלול לראות עוד עמודות</div>
+    </div>
+  </div>
+
+  <!-- טבלת משקל -->
+  <div class="card">
+    <div class="card-title">⚖️ טבלת משקל יומי</div>
+    <table id="weightTable" style="border-collapse:collapse;width:100%;font-size:12px;">
+      <thead>
+        <tr style="background:var(--card2);">
+          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">תאריך</th>
+          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">בוקר</th>
+          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">ערב</th>
+          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">פער</th>
+        </tr>
+      </thead>
+      <tbody id="weightTableBody"><tr><td colspan="4" style="padding:12px;text-align:center;color:var(--muted);">טוען...</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- גרף משקל -->
+  <div class="card">
+    <div class="card-title">📉 גרף משקל</div>
+    <div style="display:flex;gap:6px;margin-bottom:12px;justify-content:flex-end;">
+      <button id="viewDays" onclick="setChartView('days')" style="background:var(--accent);color:#000;border:none;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;">ימים</button>
+      <button id="viewWeeks" onclick="setChartView('weeks')" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;cursor:pointer;">שבועות</button>
+      <button id="viewMonths" onclick="setChartView('months')" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;cursor:pointer;">חודשים</button>
+    </div>
+    <div style="display:flex;align-items:stretch;">
+      <div id="yAxis" style="display:flex;flex-direction:column;justify-content:space-between;padding-bottom:24px;padding-left:4px;font-size:10px;color:var(--muted);min-width:36px;text-align:left;"></div>
+      <div style="overflow-x:auto;flex:1;" id="chartScroll">
+        <canvas id="weightChart" height="140" style="display:block;"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- מעקב אירובי -->
+  <div class="card">
+    <div class="card-title">🏃 מעקב אירובי שבועי</div>
+    <table style="border-collapse:collapse;width:100%;font-size:12px;">
+      <thead>
+        <tr style="background:var(--card2);">
+          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">שבוע</th>
+          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">תאריכים</th>
+          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">אימונים</th>
+        </tr>
+      </thead>
+      <tbody id="aerobicTableBody"><tr><td colspan="3" style="padding:12px;text-align:center;color:var(--muted);">טוען...</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- ייצוא -->
+  <div class="card">
+    <div class="card-title">📥 ייצוא לאקסל</div>
     <button class="btn btn-primary" onclick="exportToCSV()">📥 ייצא לאקסל (XLSX)</button>
   </div>
 
-  <div class="card">
-    <div class="card-title">📈 סיכום כללי</div>
-    <div id="summaryStats" class="loading">טוען נתונים...</div>
-  </div>
 </div>
 
 <div class="bottom-nav">
@@ -495,7 +566,7 @@
     <span class="nav-icon">📜</span>חוקים
   </button>
   <button class="nav-item" onclick="showPage('export'); setNavActive(this)">
-    <span class="nav-icon">📤</span>ייצוא
+    <span class="nav-icon">📊</span>נתונים
   </button>
 </div>
 
@@ -793,34 +864,274 @@ window.copyTrainerLink = function() {
   navigator.clipboard.writeText(window.location.href).then(() => showToast('הקישור הועתק! ✓'));
 };
 
-// ---- SUMMARY ----
-async function loadSummary() {
+// ---- DATA PAGE ----
+let chartView = 'days';
+let allDailyData = {};
+let allAerobicData = {};
+
+window.setChartView = function(view) {
+  chartView = view;
+  ['days','weeks','months'].forEach(v => {
+    const btn = document.getElementById('view' + v.charAt(0).toUpperCase() + v.slice(1));
+    if (btn) { btn.style.background = v === view ? 'var(--accent)' : 'var(--bg3)'; btn.style.color = v === view ? '#000' : 'var(--muted)'; btn.style.fontWeight = v === view ? '700' : '400'; }
+  });
+  drawChart();
+};
+
+async function loadDataPage() {
   try {
     const snap = await getDocs(collection(db, 'daily'));
-    let totalDays = 0, waterDays = 0, strengthBothDays = 0, visualDays = 0, successDays = 0;
-    snap.forEach(d => {
-      const data = d.data();
-      totalDays++;
-      if (data.water) waterDays++;
-      if (data.strengthMorning && data.strengthEvening) strengthBothDays++;
-      if (data.visualization) visualDays++;
-      if (data.successesSent) successDays++;
-    });
+    allDailyData = {};
+    snap.forEach(d => { allDailyData[d.id] = d.data(); });
     const aerobicSnap = await getDocs(collection(db, 'aerobic'));
-    let aerobicCount = 0;
-    aerobicSnap.forEach(d => { if (d.data().done) aerobicCount++; });
+    allAerobicData = {};
+    aerobicSnap.forEach(d => { allAerobicData[d.id] = d.data(); });
+  } catch(e) { console.error(e); }
 
-    document.getElementById('summaryStats').innerHTML = `
-      <div class="stats-grid">
-        <div class="stat-box"><div class="stat-value">${totalDays}</div><div class="stat-label">ימים עם נתונים</div></div>
-        <div class="stat-box"><div class="stat-value">${aerobicCount}</div><div class="stat-label">אימוני אירובי</div></div>
-        <div class="stat-box"><div class="stat-value">${waterDays}</div><div class="stat-label">ימי מים ✓</div></div>
-        <div class="stat-box"><div class="stat-value">${strengthBothDays}</div><div class="stat-label">ימי כוח מלאים</div></div>
-        <div class="stat-box"><div class="stat-value">${visualDays}</div><div class="stat-label">ימי דמיון ✓</div></div>
-        <div class="stat-box"><div class="stat-value">${successDays}</div><div class="stat-label">שליחות למאמנת</div></div>
-      </div>
-    `;
-  } catch(e) {}
+  buildMainTable();
+  buildWeightTable();
+  drawChart();
+  buildAerobicTable();
+}
+
+function buildMainTable() {
+  const tbody = document.getElementById('mainTableBody');
+  if (!tbody) return;
+  const todayKey = dateKey(new Date());
+  let rows = '';
+  let d = new Date(START_DATE);
+  let alt = false;
+  while (d <= END_DATE) {
+    const key = dateKey(d);
+    const isPast = key <= todayKey;
+    const day = allDailyData[key] || {};
+    const hasData = isPast && Object.keys(day).filter(k => k !== 'updatedAt').length > 0;
+    const bg = alt ? 'background:var(--bg3);' : '';
+    const yn = (val) => hasData ? (val ? `<span style="color:var(--green)">✓</span>` : `<span style="color:var(--red)">✗</span>`) : '';
+    const aerobic = isPast ? (allAerobicData[key]?.done ? `<span style="color:var(--green)">✓</span>` : (hasData ? `<span style="color:var(--red)">✗</span>` : '')) : '';
+    rows += `<tr style="${bg}">
+      <td style="padding:5px 8px;border:1px solid var(--border);${!isPast?'color:var(--muted)':''}">${d.getDate()}/${d.getMonth()+1}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);${!isPast?'color:var(--muted)':''}">${HEB_DAYS[d.getDay()]}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);">${isPast ? (day.weightMorning||'') : ''}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);">${isPast ? (day.weightEvening||'') : ''}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.strengthMorning)}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.strengthEvening)}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${aerobic}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.water)}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.visualization)}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.nutritionMethod)}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.nutritionAvoid)}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.successesSent)}</td>
+    </tr>`;
+    alt = !alt;
+    d.setDate(d.getDate() + 1);
+  }
+  tbody.innerHTML = rows;
+}
+
+function buildWeightTable() {
+  const tbody = document.getElementById('weightTableBody');
+  if (!tbody) return;
+  const todayKey = dateKey(new Date());
+  let rows = '';
+  let alt = false;
+  let d = new Date(START_DATE);
+  while (d <= END_DATE) {
+    const key = dateKey(d);
+    if (key > todayKey) { d.setDate(d.getDate()+1); continue; }
+    const day = allDailyData[key] || {};
+    if (!day.weightMorning && !day.weightEvening) { d.setDate(d.getDate()+1); alt=!alt; continue; }
+    const bg = alt ? 'background:var(--bg3);' : '';
+    const m = parseFloat(day.weightMorning)||0;
+    const e = parseFloat(day.weightEvening)||0;
+    const diff = (m && e) ? (e - m).toFixed(1) : '';
+    const diffColor = diff ? (parseFloat(diff) < 0 ? 'color:var(--green)' : 'color:var(--red)') : '';
+    rows += `<tr style="${bg}">
+      <td style="padding:5px 8px;border:1px solid var(--border);">${d.getDate()}/${d.getMonth()+1}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);">${day.weightMorning||''}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);">${day.weightEvening||''}</td>
+      <td style="padding:5px 8px;border:1px solid var(--border);${diffColor}">${diff}</td>
+    </tr>`;
+    alt = !alt;
+    d.setDate(d.getDate()+1);
+  }
+  tbody.innerHTML = rows || `<tr><td colspan="4" style="padding:12px;text-align:center;color:var(--muted);">אין נתוני משקל עדיין</td></tr>`;
+}
+
+function drawChart() {
+  const canvas = document.getElementById('weightChart');
+  const yAxisEl = document.getElementById('yAxis');
+  if (!canvas) return;
+  const todayKey = dateKey(new Date());
+
+  // Collect data points
+  let points = [];
+  if (chartView === 'days') {
+    let d = new Date(START_DATE);
+    while (d <= END_DATE) {
+      const key = dateKey(d);
+      if (key <= todayKey) {
+        const day = allDailyData[key] || {};
+        if (day.weightMorning) points.push({ label: `${d.getDate()}/${d.getMonth()+1}`, val: parseFloat(day.weightMorning) });
+        else points.push({ label: `${d.getDate()}/${d.getMonth()+1}`, val: null });
+      }
+      d.setDate(d.getDate()+1);
+    }
+  } else if (chartView === 'weeks') {
+    let d = new Date(START_DATE);
+    let w = 1;
+    while (d <= END_DATE) {
+      const weekEnd = new Date(d); weekEnd.setDate(weekEnd.getDate()+6);
+      const label = `ש${w}`;
+      let vals = [];
+      let dd = new Date(d);
+      while (dd <= weekEnd && dd <= END_DATE) {
+        const key = dateKey(dd);
+        if (key <= todayKey && allDailyData[key]?.weightMorning) vals.push(parseFloat(allDailyData[key].weightMorning));
+        dd.setDate(dd.getDate()+1);
+      }
+      if (vals.length) points.push({ label, val: vals.reduce((a,b)=>a+b,0)/vals.length });
+      else points.push({ label, val: null });
+      d.setDate(d.getDate()+7); w++;
+    }
+  } else {
+    const months = {};
+    let d = new Date(START_DATE);
+    while (d <= END_DATE) {
+      const key = dateKey(d);
+      const mk = `${d.getMonth()+1}/${d.getFullYear()}`;
+      if (key <= todayKey && allDailyData[key]?.weightMorning) {
+        if (!months[mk]) months[mk] = [];
+        months[mk].push(parseFloat(allDailyData[key].weightMorning));
+      }
+      d.setDate(d.getDate()+1);
+    }
+    ['5/2026','6/2026','7/2026'].forEach(mk => {
+      const [m] = mk.split('/');
+      const label = `${m}/`;
+      if (months[mk]) points.push({ label, val: months[mk].reduce((a,b)=>a+b,0)/months[mk].length });
+      else points.push({ label, val: null });
+    });
+  }
+
+  const validVals = points.filter(p => p.val !== null).map(p => p.val);
+  if (validVals.length === 0) {
+    canvas.width = 300; canvas.height = 140;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#7a7f9a'; ctx.font = '12px Heebo'; ctx.textAlign = 'center';
+    ctx.fillText('אין נתוני משקל עדיין', 150, 70);
+    yAxisEl.innerHTML = '';
+    return;
+  }
+
+  const minVal = Math.floor(Math.min(...validVals) - 0.5);
+  const maxVal = Math.ceil(Math.max(...validVals) + 0.5);
+  const colW = chartView === 'days' ? 40 : chartView === 'weeks' ? 50 : 70;
+  const totalW = Math.max(points.length * colW, 300);
+  canvas.width = totalW; canvas.height = 140;
+  const ctx = canvas.getContext('2d');
+  const padTop = 10, padBot = 30, padLeft = 5, padRight = 10;
+  const chartH = 140 - padTop - padBot;
+  const chartW = totalW - padLeft - padRight;
+
+  ctx.clearRect(0, 0, totalW, 140);
+
+  // Grid lines
+  const steps = maxVal - minVal;
+  for (let i = 0; i <= steps; i++) {
+    const y = padTop + (i / steps) * chartH;
+    ctx.strokeStyle = '#2a2d45'; ctx.lineWidth = 0.5;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(padLeft, y); ctx.lineTo(totalW - padRight, y); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // X axis
+  ctx.strokeStyle = '#2a2d45'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(padLeft, padTop + chartH); ctx.lineTo(totalW - padRight, padTop + chartH); ctx.stroke();
+
+  // Line + fill
+  const getY = val => padTop + ((maxVal - val) / (maxVal - minVal)) * chartH;
+  const getX = i => padLeft + (i + 0.5) * (chartW / points.length);
+
+  ctx.beginPath();
+  let started = false;
+  const linePoints = [];
+  points.forEach((p, i) => {
+    if (p.val === null) return;
+    const x = getX(i), y = getY(p.val);
+    linePoints.push({x, y});
+    if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = '#f0a500'; ctx.lineWidth = 2; ctx.stroke();
+
+  // Fill
+  if (linePoints.length >= 2) {
+    ctx.beginPath();
+    ctx.moveTo(linePoints[0].x, linePoints[0].y);
+    linePoints.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.lineTo(linePoints[linePoints.length-1].x, padTop + chartH);
+    ctx.lineTo(linePoints[0].x, padTop + chartH);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(240,165,0,0.08)'; ctx.fill();
+  }
+
+  // Dots
+  linePoints.forEach(p => {
+    ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2);
+    ctx.fillStyle = '#f0a500'; ctx.fill();
+  });
+
+  // X labels
+  ctx.fillStyle = '#7a7f9a'; ctx.font = '9px Heebo'; ctx.textAlign = 'center';
+  points.forEach((p, i) => {
+    ctx.fillText(p.label, getX(i), 140 - 8);
+  });
+
+  // Y axis labels
+  let yHTML = '';
+  for (let i = 0; i <= steps; i++) {
+    yHTML += `<span>${maxVal - i}</span>`;
+  }
+  yAxisEl.innerHTML = yHTML;
+}
+
+function buildAerobicTable() {
+  const tbody = document.getElementById('aerobicTableBody');
+  if (!tbody) return;
+  const todayKey = dateKey(new Date());
+  let rows = '';
+  let d = new Date(START_DATE);
+  let w = 1;
+  let alt = false;
+
+  while (d <= END_DATE) {
+    const weekStart = new Date(d);
+    const weekEnd = new Date(d); weekEnd.setDate(weekEnd.getDate()+6);
+    let count = 0;
+    let dd = new Date(weekStart);
+    while (dd <= weekEnd && dd <= END_DATE) {
+      const key = dateKey(dd);
+      if (key <= todayKey && allAerobicData[key]?.done) count++;
+      dd.setDate(dd.getDate()+1);
+    }
+    const bg = alt ? 'background:var(--bg3);' : '';
+    let badge = '';
+    if (count === 0) badge = `<span style="color:var(--muted)">—</span>`;
+    else if (count === 1) badge = `1 👍`;
+    else if (count === 2) badge = `2 👏`;
+    else if (count === 3) badge = `3 💪 תותח על!`;
+    else badge = `${count} 👑 מלך!`;
+
+    rows += `<tr style="${bg}">
+      <td style="padding:6px 8px;border:1px solid var(--border);">שבוע ${w}</td>
+      <td style="padding:6px 8px;border:1px solid var(--border);color:var(--muted);font-size:11px;">${weekStart.getDate()}/${weekStart.getMonth()+1}–${Math.min(weekEnd.getDate(), new Date(END_DATE).getDate())}/${weekEnd.getMonth()+1}</td>
+      <td style="padding:6px 8px;border:1px solid var(--border);">${badge}</td>
+    </tr>`;
+    d.setDate(d.getDate()+7);
+    w++; alt = !alt;
+  }
+  tbody.innerHTML = rows;
 }
 
 window.showToast = function(msg) {
@@ -835,7 +1146,7 @@ window.showPage = function(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   if (name === 'aerobic') buildAerobicWeeks();
-  if (name === 'export') loadSummary();
+  if (name === 'export') loadDataPage();
 };
 
 window.setNavActive = function(el) {
