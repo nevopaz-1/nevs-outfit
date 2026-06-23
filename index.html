@@ -301,7 +301,7 @@
     <div style="display:flex;gap:6px;align-items:stretch;">
       <div id="yAxis" style="display:flex;flex-direction:column;justify-content:space-between;padding-bottom:28px;font-size:12px;color:var(--muted);min-width:34px;text-align:left;"></div>
       <div style="overflow-x:auto;flex:1;" id="chartScroll">
-        <canvas id="weightChart" height="240" style="display:block;"></canvas>
+        <canvas id="weightChart" height="300" style="display:block;"></canvas>
       </div>
     </div>
   </div>
@@ -663,8 +663,7 @@ function buildMainTable() {
     allRows.push({ d: new Date(d), key, day, hasData, yn, aerobic });
     d.setDate(d.getDate()+1);
   }
-  // Reverse: newest first
-  allRows.reverse();
+  // Oldest first - newest at bottom
   allRows.forEach((r, idx) => {
     const bg = idx % 2 === 1 ? 'background:#fafafa;' : '';
     rows += `<tr style="${bg}">
@@ -683,6 +682,9 @@ function buildMainTable() {
     </tr>`;
   });
   tbody.innerHTML = rows || `<tr><td colspan="12" style="padding:16px;text-align:center;color:var(--muted);">אין נתונים עדיין</td></tr>`;
+  // Scroll to bottom to show most recent
+  const wrap = document.querySelector('.main-table-wrap');
+  if (wrap) setTimeout(() => { wrap.scrollTop = wrap.scrollHeight; }, 50);
 }
 
 function drawChart() {
@@ -750,7 +752,7 @@ function drawChart() {
   const maxVal = Math.ceil(Math.max(...validVals) + 0.5);
   const colW = chartView === 'days' ? 44 : chartView === 'weeks' ? 60 : 90;
   const totalW = Math.max(points.length * colW, 320);
-  const totalH = 240;
+  const totalH = 300;
   canvas.width = totalW; canvas.height = totalH;
   const ctx = canvas.getContext('2d');
   const padTop = 20, padBot = 36, padLeft = 6, padRight = 12;
