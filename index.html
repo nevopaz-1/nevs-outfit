@@ -38,22 +38,7 @@
     .app-header p { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 
     .tabs { display: none; }
-
-    .pages-container {
-      display: flex;
-      width: 500%;
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
-    }
-    .pages-container.no-transition { transition: none; }
-
-    .page {
-      width: 20%;
-      flex-shrink: 0;
-      padding: 14px;
-      min-height: calc(100vh - 120px);
-      box-sizing: border-box;
-    }
+    .page { display: none; padding: 14px; }
     .page.active { display: block; }
 
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -154,7 +139,6 @@
 <div class="toast" id="toast">נשמר! ✓</div>
 
 <!-- ===================== DAILY ===================== -->
-<div class="pages-container" id="pagesContainer">
 <div class="page active" id="page-daily">
   <div class="date-nav">
     <button class="date-nav-btn" onclick="changeDay(-1)">→ יום קודם</button>
@@ -361,7 +345,6 @@
     <button class="btn btn-primary" onclick="exportToCSV()">📥 ייצא לאקסל (XLSX)</button>
   </div>
 </div>
-</div><!-- end pages-container -->
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
@@ -955,8 +938,6 @@ window.showPage = function(name) {
   if (name === 'initial') { loadInitial(); }
 };
 
-window.setNavActive = function(el) {
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 window.showPage = function(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
@@ -977,11 +958,10 @@ let swipeStartX = 0, swipeStartY = 0, swipeLocked = false;
 
 function goToPage(idx) {
   if (idx < 0 || idx >= pages.length || idx === currentPageIdx) return;
-  const name = pages[idx];
   currentPageIdx = idx;
+  const name = pages[idx];
   showPage(name);
-  const navItems = document.querySelectorAll('.nav-item');
-  navItems.forEach((n, i) => n.classList.toggle('active', i === idx));
+  document.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === idx));
 }
 
 document.addEventListener('touchstart', e => {
