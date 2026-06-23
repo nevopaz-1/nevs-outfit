@@ -951,36 +951,6 @@ window.setNavActive = function(el) {
   el.classList.add('active');
 };
 
-// ---- SWIPE NAVIGATION ----
-const pages = ['daily', 'aerobic', 'initial', 'rules', 'export'];
-let currentPageIdx = 0;
-let swipeStartX = 0, swipeStartY = 0, swipeLocked = false;
-
-function goToPage(idx) {
-  if (idx < 0 || idx >= pages.length || idx === currentPageIdx) return;
-  currentPageIdx = idx;
-  const name = pages[idx];
-  showPage(name);
-  document.querySelectorAll('.nav-item').forEach((n, i) => n.classList.toggle('active', i === idx));
-}
-
-document.addEventListener('touchstart', e => {
-  const blocked = e.target.closest('.main-table-wrap, #chartScroll, .week-grid, textarea, input, select');
-  if (blocked) { swipeLocked = true; return; }
-  swipeLocked = false;
-  swipeStartX = e.touches[0].clientX;
-  swipeStartY = e.touches[0].clientY;
-}, { passive: true });
-
-document.addEventListener('touchend', e => {
-  if (swipeLocked) return;
-  const dx = e.changedTouches[0].clientX - swipeStartX;
-  const dy = e.changedTouches[0].clientY - swipeStartY;
-  if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.7) return;
-  if (dx < 0) goToPage(currentPageIdx + 1);
-  else goToPage(currentPageIdx - 1);
-}, { passive: true });
-
 updateDateDisplays();
 loadDaily();
 loadInitial();
