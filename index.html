@@ -38,7 +38,22 @@
     .app-header p { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 
     .tabs { display: none; }
-    .page { display: none; padding: 14px; }
+
+    .pages-container {
+      display: flex;
+      width: 500%;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .pages-container.no-transition { transition: none; }
+
+    .page {
+      width: 20%;
+      flex-shrink: 0;
+      padding: 14px;
+      min-height: calc(100vh - 120px);
+      box-sizing: border-box;
+    }
     .page.active { display: block; }
 
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
@@ -139,6 +154,7 @@
 <div class="toast" id="toast">נשמר! ✓</div>
 
 <!-- ===================== DAILY ===================== -->
+<div class="pages-container" id="pagesContainer">
 <div class="page active" id="page-daily">
   <div class="date-nav">
     <button class="date-nav-btn" onclick="changeDay(-1)">→ יום קודם</button>
@@ -345,6 +361,7 @@
     <button class="btn btn-primary" onclick="exportToCSV()">📥 ייצא לאקסל (XLSX)</button>
   </div>
 </div>
+</div><!-- end pages-container -->
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
@@ -945,35 +962,77 @@ window.setNavActive = function(el) {
 
 // ---- SWIPE NAVIGATION ----
 const pages = ['daily', 'aerobic', 'initial', 'rules', 'export'];
-let swipeStartX = 0, swipeStartY = 0;
+let currentPageIdx = 0;
+let swipeStartX = 0, swipeStartY = 0, swipeTracking = false;
+
+const container = document.getElementById('pagesContainer');
+
+function goToPage(idx, animate = true) {
+  if (idx < 0 || idx >= pages.length) return;
+  currentPageIdx = idx;
+  if (!animate) container.classList.add('no-transition');
+  container.style.transform = `translateX(${idx * 20}%)`;
+  if (!animate) { container.offsetHeight; container.classList.remove('no-transition'); }
+
+  document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === idx));
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach((n, i) => n.classList.toggle('active', i === idx));
+
+  const name = pages[idx];
+  if (name === 'aerobic') buildAerobicWeeks();
+  if (name === 'export') loadDataPage();
+  if (name === 'initial') loadInitial();
+}
 
 document.addEventListener('touchstart', e => {
+  // Don't swipe if touching a scrollable element horizontally
+  const target = e.target.closest('.main-table-wrap, .week-grid, #chartScroll');
+  if (target) return;
   swipeStartX = e.touches[0].clientX;
   swipeStartY = e.touches[0].clientY;
+  swipeTracking = true;
+}, { passive: true });
+
+document.addEventListener('touchmove', e => {
+  if (!swipeTracking) return;
+  const dx = e.touches[0].clientX - swipeStartX;
+  const dy = e.touches[0].clientY - swipeStartY;
+  if (Math.abs(dy) > Math.abs(dx) * 1.2) { swipeTracking = false; return; }
+  // Move container in real time
+  const baseOffset = currentPageIdx * 20;
+  const pct = (dx / window.innerWidth) * 100;
+  container.classList.add('no-transition');
+  container.style.transform = `translateX(${baseOffset + pct / 5}%)`;
 }, { passive: true });
 
 document.addEventListener('touchend', e => {
+  if (!swipeTracking) return;
+  swipeTracking = false;
+  container.classList.remove('no-transition');
   const dx = e.changedTouches[0].clientX - swipeStartX;
   const dy = e.changedTouches[0].clientY - swipeStartY;
-  if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx) * 0.8) return;
-  const activePage = document.querySelector('.page.active');
-  if (!activePage) return;
-  const currentId = activePage.id.replace('page-', '');
-  const currentIdx = pages.indexOf(currentId);
-  // RTL: swipe right = previous page, swipe left = next page
-  if (dx > 0 && currentIdx > 0) {
-    const prevPage = pages[currentIdx - 1];
-    showPage(prevPage);
-    const navItems = document.querySelectorAll('.nav-item');
-    setNavActive(navItems[currentIdx - 1]);
-  } else if (dx < 0 && currentIdx < pages.length - 1) {
-    const nextPage = pages[currentIdx + 1];
-    showPage(nextPage);
-    const navItems = document.querySelectorAll('.nav-item');
-    setNavActive(navItems[currentIdx + 1]);
+  if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx) * 0.8) {
+    goToPage(currentPageIdx);
+    return;
   }
+  // RTL: swipe left (dx < 0) = next page, swipe right (dx > 0) = prev page
+  if (dx < 0 && currentPageIdx < pages.length - 1) goToPage(currentPageIdx + 1);
+  else if (dx > 0 && currentPageIdx > 0) goToPage(currentPageIdx - 1);
+  else goToPage(currentPageIdx);
 }, { passive: true });
 
+window.showPage = function(name) {
+  const idx = pages.indexOf(name);
+  if (idx >= 0) goToPage(idx);
+};
+
+window.setNavActive = function(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+};
+
+// Init
+goToPage(0, false);
 updateDateDisplays();
 loadDaily();
 loadInitial();
