@@ -3,258 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="theme-color" content="#0f1117" />
+  <meta name="theme-color" content="#ffffff" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="האאוטפיט של נב" />
   <title>האאוטפיט של נב</title>
   <link rel="apple-touch-icon" href="icon.png" />
   <link rel="icon" type="image/png" href="icon.png" />
   <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f1117;
-      --bg2: #171921;
-      --bg3: #1e2130;
-      --card: #1a1d2e;
-      --card2: #222540;
-      --accent: #f0a500;
-      --accent2: #e07b00;
-      --green: #2ecc71;
+      --bg: #f5f5f7;
+      --bg2: #ffffff;
+      --bg3: #f0f0f2;
+      --card: #ffffff;
+      --accent: #e8730a;
+      --accent2: #c55e00;
+      --green: #2a9d2a;
       --red: #e74c3c;
-      --blue: #4a90d9;
-      --text: #eef0f8;
-      --muted: #7a7f9a;
-      --border: #2a2d45;
+      --blue: #1a73e8;
+      --text: #1a1a1a;
+      --muted: #888888;
+      --border: #e8e8e8;
       --radius: 14px;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Heebo', sans-serif; min-height: 100vh; padding-bottom: 80px; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Heebo', sans-serif;
-      min-height: 100vh;
-      padding-bottom: 80px;
-    }
-
-    .app-header {
-      background: linear-gradient(135deg, #0f1117 0%, #1a1d2e 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 20px 12px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .app-header h1 { font-size: 1.4rem; font-weight: 900; color: var(--accent); letter-spacing: -0.5px; }
+    .app-header { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 20px 10px; position: sticky; top: 0; z-index: 100; }
+    .app-header h1 { font-size: 1.3rem; font-weight: 900; color: var(--accent); letter-spacing: -0.5px; }
     .app-header p { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 
     .tabs { display: none; }
-
-    .page { display: none; padding: 16px; }
+    .page { display: none; padding: 14px; }
     .page.active { display: block; }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 14px;
-    }
-    .card-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .card-title { font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
 
     input[type="text"], input[type="number"], textarea, select {
-      width: 100%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: 'Heebo', sans-serif;
-      font-size: 0.9rem;
-      padding: 10px 12px;
-      outline: none;
-      transition: border-color 0.2s;
+      width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: 'Heebo', sans-serif; font-size: 0.9rem; padding: 10px 12px; outline: none; transition: border-color 0.2s;
     }
     input:focus, textarea:focus, select:focus { border-color: var(--accent); }
     textarea { resize: vertical; min-height: 80px; }
     label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; margin-top: 10px; }
     label:first-child { margin-top: 0; }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-family: 'Heebo', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-    .btn-primary { background: var(--accent); color: #000; width: 100%; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 20px; border-radius: 10px; font-family: 'Heebo', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; }
     .btn-primary:hover { background: var(--accent2); }
-    .btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); width: 100%; }
+    .btn-outline { background: #fff; color: var(--accent); border: 1.5px solid var(--accent); width: 100%; }
 
-    .check-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
+    .check-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
     .check-row:last-child { border-bottom: none; }
-    .check-label { font-size: 0.85rem; }
+    .check-label { font-size: 0.85rem; color: var(--text); }
     .check-label small { display: block; color: var(--muted); font-size: 0.72rem; }
 
     .toggle { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
     .toggle input { opacity: 0; width: 0; height: 0; }
-    .toggle-slider {
-      position: absolute;
-      inset: 0;
-      background: var(--bg3);
-      border-radius: 26px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .toggle-slider:before {
-      content: '';
-      position: absolute;
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: var(--muted);
-      top: 3px; right: 3px;
-      transition: 0.2s;
-    }
-    .toggle input:checked + .toggle-slider { background: var(--green); border-color: var(--green); }
-    .toggle input:checked + .toggle-slider:before { background: #fff; transform: translateX(-20px); }
+    .toggle-slider { position: absolute; inset: 0; background: #ddd; border-radius: 26px; cursor: pointer; transition: 0.2s; }
+    .toggle-slider:before { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 4px; right: 4px; transition: 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+    .toggle input:checked + .toggle-slider { background: var(--green); }
+    .toggle input:checked + .toggle-slider:before { transform: translateX(-20px); }
 
     .weight-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .weight-box label { margin-top: 0; }
 
     .date-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-    .date-nav-btn {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 8px;
-      padding: 8px 14px;
-      cursor: pointer;
-      font-size: 0.85rem;
-    }
+    .date-nav-btn { background: #fff; border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 0.85rem; font-family: 'Heebo', sans-serif; }
     .date-display { font-size: 0.95rem; font-weight: 700; color: var(--accent); }
-
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-    .stat-box { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
-    .stat-value { font-size: 1.4rem; font-weight: 900; color: var(--accent); }
-    .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
 
     .rule-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; line-height: 1.5; }
     .rule-item:last-child { border-bottom: none; }
-    .rule-num {
-      flex-shrink: 0;
-      width: 24px; height: 24px;
-      background: var(--accent);
-      color: #000;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 0.75rem; margin-top: 1px;
-    }
+    .rule-num { flex-shrink: 0; width: 24px; height: 24px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.75rem; margin-top: 1px; }
 
     .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px; }
-    .day-cell {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 2px;
-      text-align: center;
-      font-size: 0.65rem;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .day-cell.done { background: var(--green); border-color: var(--green); color: #000; font-weight: 700; }
+    .day-cell { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 6px 2px; text-align: center; font-size: 0.65rem; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+    .day-cell.done { background: var(--green); border-color: var(--green); color: #fff; font-weight: 700; }
     .day-cell.today { border-color: var(--accent); color: var(--accent); }
 
     .save-status { font-size: 0.75rem; color: var(--green); text-align: center; margin-top: 8px; min-height: 18px; }
 
     .initial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .initial-item label { margin-top: 0; }
-
-    .section-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--accent);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 6px;
-      margin: 14px 0 10px;
-    }
+    .section-title { font-size: 0.82rem; font-weight: 700; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin: 14px 0 10px; }
     .section-title:first-child { margin-top: 0; }
 
-    .toast {
-      position: fixed;
-      bottom: 90px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--green);
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      z-index: 999;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
+    .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--green); color: #fff; padding: 10px 20px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
     .toast.show { opacity: 1; }
 
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid var(--border); display: flex; z-index: 100; }
-    .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 4px 8px;
-      cursor: pointer;
-      color: var(--muted);
-      font-size: 0.62rem;
-      gap: 3px;
-      border: none;
-      background: transparent;
-      transition: color 0.2s;
-      position: relative;
-    }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid var(--border); display: flex; z-index: 100; }
+    .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px 8px; cursor: pointer; color: var(--muted); font-size: 0.62rem; gap: 3px; border: none; background: transparent; transition: color 0.2s; position: relative; font-family: 'Heebo', sans-serif; }
     .nav-item.active { color: var(--accent); font-weight: 700; }
-    .nav-item.active::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 15%; right: 15%;
-      height: 3px;
-      background: var(--accent);
-      border-radius: 0 0 4px 4px;
-    }
+    .nav-item.active::before { content: ''; position: absolute; top: 0; left: 15%; right: 15%; height: 3px; background: var(--accent); border-radius: 0 0 4px 4px; }
     .nav-icon { font-size: 1.3rem; transition: transform 0.2s; }
     .nav-item.active .nav-icon { transform: scale(1.2); }
 
     .section-divider { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin: 14px 0 8px; }
     .loading { text-align: center; color: var(--muted); padding: 20px; font-size: 0.85rem; }
+
+    /* גרף */
+    .chart-view-btns { display: flex; gap: 6px; margin-bottom: 12px; justify-content: flex-start; }
+    .chart-btn { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; font-family: 'Heebo', sans-serif; }
+    .chart-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); font-weight: 700; }
+
+    /* מדדים */
+    .measure-bar-wrap { margin-bottom: 8px; }
+    .measure-bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 3px; color: var(--text); }
+    .measure-bar-label span:last-child { color: var(--green); font-weight: 700; }
+    .measure-bar-track { height: 12px; background: var(--bg3); border-radius: 6px; overflow: hidden; position: relative; }
+    .measure-bar-start { position: absolute; right: 0; top: 0; height: 100%; background: #b5d4f4; border-radius: 6px; }
+    .measure-bar-now { position: absolute; right: 0; top: 0; height: 100%; background: var(--blue); border-radius: 6px; }
+
+    /* טבלת על */
+    .main-table-wrap { overflow-x: auto; max-height: 280px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; }
+    .main-table { border-collapse: collapse; min-width: 650px; width: 100%; font-size: 12px; }
+    .main-table th { padding: 7px 9px; border-bottom: 2px solid var(--border); color: var(--accent); white-space: nowrap; background: #fafafa; position: sticky; top: 0; text-align: right; font-weight: 700; }
+    .main-table td { padding: 6px 9px; border-bottom: 1px solid #f5f5f5; text-align: right; }
+    .main-table tr:last-child td { border-bottom: none; }
+    .main-table tr:nth-child(even) td { background: #fafafa; }
   </style>
 </head>
 <body>
@@ -264,19 +134,11 @@
   <p id="headerDate">טוען...</p>
 </div>
 
-<div class="tabs">
-  <button class="tab active" onclick="showPage('daily')">יומי</button>
-  <button class="tab" onclick="showPage('aerobic')">אירובי</button>
-  <button class="tab" onclick="showPage('initial')">נתונים ראשוניים</button>
-  <button class="tab" onclick="showPage('rules')">חוקי התזונה</button>
-  <button class="tab" onclick="showPage('export')">ייצוא</button>
-</div>
-
+<div class="tabs"></div>
 <div class="toast" id="toast">נשמר! ✓</div>
 
-<!-- ===================== PAGE: DAILY ===================== -->
+<!-- ===================== DAILY ===================== -->
 <div class="page active" id="page-daily">
-
   <div class="date-nav">
     <button class="date-nav-btn" onclick="changeDay(-1)">→ יום קודם</button>
     <div class="date-display" id="currentDateDisplay">-</div>
@@ -286,77 +148,49 @@
   <div class="card">
     <div class="card-title">⚖️ משקל יומי</div>
     <div class="weight-row">
-      <div class="weight-box">
-        <label>משקל בוקר (ק"ג)</label>
-        <input type="number" step="0.1" id="weightMorning" placeholder="0.0" onchange="saveDaily()" />
-      </div>
-      <div class="weight-box">
-        <label>משקל ערב (ק"ג)</label>
-        <input type="number" step="0.1" id="weightEvening" placeholder="0.0" onchange="saveDaily()" />
-      </div>
+      <div class="weight-box"><label>משקל בוקר (ק"ג)</label><input type="number" step="0.1" id="weightMorning" placeholder="0.0" onchange="saveDaily()" /></div>
+      <div class="weight-box"><label>משקל ערב (ק"ג)</label><input type="number" step="0.1" id="weightEvening" placeholder="0.0" onchange="saveDaily()" /></div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-title">🏋️ תרגילי כוח יומיים</div>
     <p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px;">סט = 10 שכמות + 10 בטן + 10 פלאנק</p>
-    <div class="check-row">
-      <div class="check-label">סט בוקר<small>שכמות + בטן + פלאנק</small></div>
-      <label class="toggle"><input type="checkbox" id="strengthMorning" onchange="saveDaily()" /><span class="toggle-slider"></span></label>
-    </div>
-    <div class="check-row">
-      <div class="check-label">סט ערב<small>שכמות + בטן + פלאנק</small></div>
-      <label class="toggle"><input type="checkbox" id="strengthEvening" onchange="saveDaily()" /><span class="toggle-slider"></span></label>
-    </div>
+    <div class="check-row"><div class="check-label">סט בוקר<small>שכמות + בטן + פלאנק</small></div><label class="toggle"><input type="checkbox" id="strengthMorning" onchange="saveDaily()" /><span class="toggle-slider"></span></label></div>
+    <div class="check-row"><div class="check-label">סט ערב<small>שכמות + בטן + פלאנק</small></div><label class="toggle"><input type="checkbox" id="strengthEvening" onchange="saveDaily()" /><span class="toggle-slider"></span></label></div>
   </div>
 
   <div class="card">
     <div class="card-title">💧 שתיית מים</div>
-    <div class="check-row">
-      <div class="check-label">שתיתי לפחות 1.5 ליטר מים<small>חובה יומית</small></div>
-      <label class="toggle"><input type="checkbox" id="water" onchange="saveDaily()" /><span class="toggle-slider"></span></label>
-    </div>
+    <div class="check-row"><div class="check-label">שתיתי לפחות 1.5 ליטר מים<small>חובה יומית</small></div><label class="toggle"><input type="checkbox" id="water" onchange="saveDaily()" /><span class="toggle-slider"></span></label></div>
   </div>
 
   <div class="card">
     <div class="card-title">🧘 דמיון מודרך</div>
-    <div class="check-row">
-      <div class="check-label">דמיינתי היום 3 דקות איך ארצה להיראות<small>3 דקות לפני השינה</small></div>
-      <label class="toggle"><input type="checkbox" id="visualization" onchange="saveDaily()" /><span class="toggle-slider"></span></label>
-    </div>
+    <div class="check-row"><div class="check-label">דמיינתי היום 3 דקות איך ארצה להיראות<small>3 דקות לפני השינה</small></div><label class="toggle"><input type="checkbox" id="visualization" onchange="saveDaily()" /><span class="toggle-slider"></span></label></div>
   </div>
 
   <div class="card">
     <div class="card-title">🥗 שמירה על תזונה</div>
-    <div class="check-row">
-      <div class="check-label">אכלתי לפי שיטת הביס<small>ביס → שאלה → ביס → שאלה...</small></div>
-      <label class="toggle"><input type="checkbox" id="nutritionMethod" onchange="saveDaily()" /><span class="toggle-slider"></span></label>
-    </div>
-    <div class="check-row">
-      <div class="check-label">נמנעתי מקמח לבן ואלכוהול<small>אין קמח לבן, אין אלכוהול</small></div>
-      <label class="toggle"><input type="checkbox" id="nutritionAvoid" onchange="saveDaily()" /><span class="toggle-slider"></span></label>
-    </div>
+    <div class="check-row"><div class="check-label">אכלתי לפי שיטת הביס<small>ביס → שאלה → ביס → שאלה...</small></div><label class="toggle"><input type="checkbox" id="nutritionMethod" onchange="saveDaily()" /><span class="toggle-slider"></span></label></div>
+    <div class="check-row"><div class="check-label">נמנעתי מקמח לבן ואלכוהול<small>אין קמח לבן, אין אלכוהול</small></div><label class="toggle"><input type="checkbox" id="nutritionAvoid" onchange="saveDaily()" /><span class="toggle-slider"></span></label></div>
   </div>
 
   <div class="card">
     <div class="card-title">🏆 הצלחות למאמנת</div>
-    <div class="check-row">
-      <div class="check-label">שלחתי למאמנת 10 הצלחות אאוטפיט + 5 הצלחות חיים<small>15 הצלחות יומיות</small></div>
-      <label class="toggle"><input type="checkbox" id="successesSent" onchange="saveDaily()" /><span class="toggle-slider"></span></label>
-    </div>
+    <div class="check-row"><div class="check-label">שלחתי למאמנת 10 הצלחות אאוטפיט + 5 הצלחות חיים<small>15 הצלחות יומיות</small></div><label class="toggle"><input type="checkbox" id="successesSent" onchange="saveDaily()" /><span class="toggle-slider"></span></label></div>
   </div>
 
   <div class="save-status" id="saveStatus"></div>
 </div>
 
-<!-- ===================== PAGE: AEROBIC ===================== -->
+<!-- ===================== AEROBIC ===================== -->
 <div class="page" id="page-aerobic">
   <div class="card">
     <div class="card-title">🏃 מעקב אימוני אירובי</div>
     <p style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">3 פעמים בשבוע לפי הכללים</p>
     <div id="aerobicWeeks"></div>
   </div>
-
   <div class="card">
     <div class="card-title">📋 כללי האימונים</div>
     <div class="rule-item"><div class="rule-num">1</div><div>אימון ראשון — <strong>ראשון או שני</strong> (לא יאוחר משני)</div></div>
@@ -365,79 +199,65 @@
   </div>
 </div>
 
-<!-- ===================== PAGE: INITIAL ===================== -->
+<!-- ===================== INITIAL ===================== -->
 <div class="page" id="page-initial">
+
+  <!-- גרף השוואת היקפים -->
+  <div class="card" id="measureChartCard">
+    <div class="card-title">📊 השוואת היקפים</div>
+    <div id="measureChart"><p style="color:var(--muted);font-size:0.82rem;">מלא את המדדים הראשוניים כדי לראות את הגרף</p></div>
+    <div style="display:flex;gap:14px;margin-top:10px;" id="measureLegend" style="display:none;">
+      <span style="display:flex;align-items:center;gap:4px;font-size:0.75rem;color:var(--muted);"><span style="width:10px;height:10px;border-radius:2px;background:#b5d4f4;display:inline-block;"></span>התחלה</span>
+      <span style="display:flex;align-items:center;gap:4px;font-size:0.75rem;color:var(--muted);"><span style="width:10px;height:10px;border-radius:2px;background:var(--blue);display:inline-block;"></span>עדכני</span>
+    </div>
+  </div>
+
+  <!-- כפתור הוסף מדדים -->
+  <button class="btn btn-outline" onclick="toggleMeasureForm()" id="addMeasureBtn" style="margin-bottom:12px;">➕ הוסף מדדים עדכניים</button>
+
+  <!-- טופס מדידה חדשה -->
+  <div class="card" id="measureForm" style="display:none;">
+    <div class="card-title">📐 מדידה חדשה</div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:10px;" id="measureFormDate"></p>
+    <div class="initial-grid">
+      <div><label>היקף חזה (ס"מ)</label><input type="number" step="0.1" id="newChest" placeholder="0.0" /></div>
+      <div><label>היקף מותן (ס"מ)</label><input type="number" step="0.1" id="newWaist" placeholder="0.0" /></div>
+      <div><label>היקף אגן (ס"מ)</label><input type="number" step="0.1" id="newHips" placeholder="0.0" /></div>
+      <div><label>היקף זרוע (ס"מ)</label><input type="number" step="0.1" id="newArm" placeholder="0.0" /></div>
+      <div><label>היקף ירך (ס"מ)</label><input type="number" step="0.1" id="newThigh" placeholder="0.0" /></div>
+    </div>
+    <button class="btn btn-primary" style="margin-top:12px;" onclick="saveNewMeasure()">💾 שמור מדידה</button>
+  </div>
 
   <div class="card">
     <div class="card-title">📏 מדדים התחלתיים</div>
     <p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px;">ממלאים פעם אחת — נשאר לתמיד</p>
-
     <div class="section-title">📍 מדדים נוכחיים</div>
     <div class="initial-grid">
-      <div>
-        <label>משקל התחלתי (ק"ג)</label>
-        <input type="number" step="0.1" id="initWeight" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>משקל יעד (ק"ג) — אוטומטי</label>
-        <input type="number" step="0.1" id="initTargetWeight" placeholder="יחושב אוטומטית" readonly style="opacity:0.6" />
-      </div>
-      <div>
-        <label>היקף חזה (ס"מ)</label>
-        <input type="number" step="0.1" id="initChest" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>היקף מותן (ס"מ)</label>
-        <input type="number" step="0.1" id="initWaist" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>היקף אגן (ס"מ)</label>
-        <input type="number" step="0.1" id="initHips" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>היקף זרוע (ס"מ)</label>
-        <input type="number" step="0.1" id="initArm" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>היקף ירך (ס"מ)</label>
-        <input type="number" step="0.1" id="initThigh" placeholder="0.0" onchange="saveInitial()" />
-      </div>
+      <div><label>משקל התחלתי (ק"ג)</label><input type="number" step="0.1" id="initWeight" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>משקל יעד (ק"ג) — אוטומטי</label><input type="number" step="0.1" id="initTargetWeight" placeholder="יחושב אוטומטית" readonly style="opacity:0.6" /></div>
+      <div><label>היקף חזה (ס"מ)</label><input type="number" step="0.1" id="initChest" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>היקף מותן (ס"מ)</label><input type="number" step="0.1" id="initWaist" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>היקף אגן (ס"מ)</label><input type="number" step="0.1" id="initHips" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>היקף זרוע (ס"מ)</label><input type="number" step="0.1" id="initArm" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>היקף ירך (ס"מ)</label><input type="number" step="0.1" id="initThigh" placeholder="0.0" onchange="saveInitial()" /></div>
     </div>
-
     <div class="section-title" style="margin-top:20px;">🎯 מדדי יעד</div>
     <p style="font-size:0.75rem;color:var(--muted);margin-bottom:10px;">לאן אני רוצה להגיע עד 27.7.2026</p>
     <div class="initial-grid">
-      <div>
-        <label>יעד היקף חזה (ס"מ)</label>
-        <input type="number" step="0.1" id="targetChest" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>יעד היקף מותן (ס"מ)</label>
-        <input type="number" step="0.1" id="targetWaist" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>יעד היקף אגן (ס"מ)</label>
-        <input type="number" step="0.1" id="targetHips" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>יעד היקף זרוע (ס"מ)</label>
-        <input type="number" step="0.1" id="targetArm" placeholder="0.0" onchange="saveInitial()" />
-      </div>
-      <div>
-        <label>יעד היקף ירך (ס"מ)</label>
-        <input type="number" step="0.1" id="targetThigh" placeholder="0.0" onchange="saveInitial()" />
-      </div>
+      <div><label>יעד היקף חזה (ס"מ)</label><input type="number" step="0.1" id="targetChest" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>יעד היקף מותן (ס"מ)</label><input type="number" step="0.1" id="targetWaist" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>יעד היקף אגן (ס"מ)</label><input type="number" step="0.1" id="targetHips" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>יעד היקף זרוע (ס"מ)</label><input type="number" step="0.1" id="targetArm" placeholder="0.0" onchange="saveInitial()" /></div>
+      <div><label>יעד היקף ירך (ס"מ)</label><input type="number" step="0.1" id="targetThigh" placeholder="0.0" onchange="saveInitial()" /></div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-title">🎯 יעדים נוספים</div>
-    <label>יעד מידה בחולצה</label>
-    <input type="text" id="initShirtSize" placeholder="לדוגמה: M, L..." onchange="saveInitial()" />
-    <label>יעד כושר גופני</label>
-    <input type="text" id="initFitnessGoal" placeholder="תאר את יעד הכושר שלך..." onchange="saveInitial()" />
-    <label>יעד העזה</label>
-    <input type="text" id="initDareGoal" placeholder="איפה אתה מתעתד להעז..." onchange="saveInitial()" />
+    <label>יעד מידה בחולצה</label><input type="text" id="initShirtSize" placeholder="לדוגמה: M, L..." onchange="saveInitial()" />
+    <label>יעד כושר גופני</label><input type="text" id="initFitnessGoal" placeholder="תאר את יעד הכושר שלך..." onchange="saveInitial()" />
+    <label>יעד העזה</label><input type="text" id="initDareGoal" placeholder="איפה אתה מתעתד להעז..." onchange="saveInitial()" />
   </div>
 
   <div class="card">
@@ -453,13 +273,13 @@
   <div class="save-status" id="saveInitialStatus"></div>
 </div>
 
-<!-- ===================== PAGE: RULES ===================== -->
+<!-- ===================== RULES ===================== -->
 <div class="page" id="page-rules">
   <div class="card">
     <div class="card-title">📜 חוקי התזונה של נב</div>
-    <div class="rule-item"><div class="rule-num">1</div><div><strong>שיטת הביס</strong><br/>כל פעם שמרגיש רעב → אוכל ביס → שואל "האם אני עדיין רעב?" → אם כן: ביס נוסף → אם לא: מפסיק. ממשיך כך עד שהתשובה היא "לא".</div></div>
+    <div class="rule-item"><div class="rule-num">1</div><div><strong>שיטת הביס</strong><br/>כל פעם שמרגיש רעב → אוכל ביס → שואל "האם אני עדיין רעב?" → אם כן: ביס נוסף → אם לא: מפסיק.</div></div>
     <div class="rule-item"><div class="rule-num">2</div><div><strong>בין ארוחות</strong><br/>מותר משהו קטן בלבד — תמר אחד, ביס מתפוח.</div></div>
-    <div class="rule-item"><div class="rule-num">3</div><div><strong>מה מותר ומה אסור</strong><br/>✅ מותר לאכול הכל<br/>❌ אסור: כל מוצר העשוי מקמח לבן<br/>❌ אסור: כל סוגי האלכוהול ללא יוצא מן הכלל</div></div>
+    <div class="rule-item"><div class="rule-num">3</div><div><strong>מה מותר ומה אסור</strong><br/>✅ מותר לאכול הכל<br/>❌ אסור: כל מוצר העשוי מקמח לבן<br/>❌ אסור: כל סוגי האלכוהול</div></div>
     <div class="rule-item"><div class="rule-num">4</div><div><strong>שתיית מים</strong><br/>חובה לשתות לפחות 1.5 ליטר מים בכל יום.</div></div>
     <div class="rule-item"><div class="rule-num">5</div><div><strong>כושר גופני יומי</strong><br/>סט אחד בבוקר + סט אחד בערב.<br/>כל סט = 10 תרגילי שכמות + 10 תרגילי בטן + 10 פלאנק.</div></div>
     <div class="rule-item"><div class="rule-num">6</div><div><strong>דמיון מודרך לפני שינה</strong><br/>כל ערב לפני השינה — 3 דקות של דמיון. דמיין את עצמך כפי שאתה רוצה להיראות בעתיד.</div></div>
@@ -467,78 +287,53 @@
   </div>
 </div>
 
-<!-- ===================== PAGE: DATA ===================== -->
+<!-- ===================== DATA ===================== -->
 <div class="page" id="page-export">
+
+  <!-- גרף משקל למעלה גדול -->
+  <div class="card">
+    <div class="card-title">📉 גרף משקל</div>
+    <div class="chart-view-btns">
+      <button class="chart-btn active" id="viewDays" onclick="setChartView('days')">ימים</button>
+      <button class="chart-btn" id="viewWeeks" onclick="setChartView('weeks')">שבועות</button>
+      <button class="chart-btn" id="viewMonths" onclick="setChartView('months')">חודשים</button>
+    </div>
+    <div style="display:flex;gap:6px;align-items:stretch;">
+      <div id="yAxis" style="display:flex;flex-direction:column;justify-content:space-between;padding-bottom:28px;font-size:12px;color:var(--muted);min-width:34px;text-align:left;"></div>
+      <div style="overflow-x:auto;flex:1;" id="chartScroll">
+        <canvas id="weightChart" height="240" style="display:block;"></canvas>
+      </div>
+    </div>
+  </div>
 
   <!-- טבלת על -->
   <div class="card">
     <div class="card-title">📊 טבלת על — כל הנתונים</div>
-    <div style="overflow-x:auto;">
-      <table id="mainTable" style="border-collapse:collapse;min-width:700px;width:100%;font-size:11px;">
+    <div class="main-table-wrap">
+      <table class="main-table" id="mainTable">
         <thead>
-          <tr style="background:var(--card2);">
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">תאריך</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">יום</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">משקל בוקר</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">משקל ערב</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">כוח בוקר</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">כוח ערב</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">אירובי</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">שתיית מים</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">דמיון</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">ביס ושאלה</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">ללא קמח ואלכוהול</th>
-            <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);white-space:nowrap;">שליחת הצלחות</th>
+          <tr>
+            <th>תאריך</th><th>יום</th><th>משקל בוקר</th><th>משקל ערב</th>
+            <th>כוח בוקר</th><th>כוח ערב</th><th>אירובי</th>
+            <th>שתיית מים</th><th>דמיון</th><th>ביס ושאלה</th>
+            <th>ללא קמח ואלכוהול</th><th>שליחת הצלחות</th>
           </tr>
         </thead>
-        <tbody id="mainTableBody"><tr><td colspan="12" style="padding:12px;text-align:center;color:var(--muted);">טוען...</td></tr></tbody>
+        <tbody id="mainTableBody"><tr><td colspan="12" style="padding:16px;text-align:center;color:var(--muted);">טוען...</td></tr></tbody>
       </table>
-      <div style="color:var(--muted);font-size:10px;margin-top:4px;text-align:left;">← גלול לראות עוד עמודות</div>
     </div>
-  </div>
-
-  <!-- טבלת משקל -->
-  <div class="card">
-    <div class="card-title">⚖️ טבלת משקל יומי</div>
-    <table id="weightTable" style="border-collapse:collapse;width:100%;font-size:12px;">
-      <thead>
-        <tr style="background:var(--card2);">
-          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">תאריך</th>
-          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">בוקר</th>
-          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">ערב</th>
-        </tr>
-      </thead>
-      <tbody id="weightTableBody"><tr><td colspan="4" style="padding:12px;text-align:center;color:var(--muted);">טוען...</td></tr></tbody>
-    </table>
-  </div>
-
-  <!-- גרף משקל -->
-  <div class="card">
-    <div class="card-title">📉 גרף משקל</div>
-    <div style="display:flex;gap:6px;margin-bottom:12px;justify-content:flex-end;">
-      <button id="viewDays" onclick="setChartView('days')" style="background:var(--accent);color:#000;border:none;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;">ימים</button>
-      <button id="viewWeeks" onclick="setChartView('weeks')" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;cursor:pointer;">שבועות</button>
-      <button id="viewMonths" onclick="setChartView('months')" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;cursor:pointer;">חודשים</button>
-    </div>
-    <div style="display:flex;align-items:stretch;">
-      <div id="yAxis" style="display:flex;flex-direction:column;justify-content:space-between;padding-bottom:24px;padding-left:4px;font-size:10px;color:var(--muted);min-width:36px;text-align:left;"></div>
-      <div style="overflow-x:auto;flex:1;" id="chartScroll">
-        <canvas id="weightChart" height="140" style="display:block;"></canvas>
-      </div>
-    </div>
+    <p style="font-size:0.72rem;color:var(--muted);margin-top:6px;text-align:left;">← גלול לצדדים לעוד עמודות | גלול למעלה לימים ישנים יותר</p>
   </div>
 
   <!-- מעקב אירובי -->
   <div class="card">
     <div class="card-title">🏃 מעקב אירובי שבועי</div>
-    <table style="border-collapse:collapse;width:100%;font-size:12px;">
-      <thead>
-        <tr style="background:var(--card2);">
-          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">שבוע</th>
-          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">תאריכים</th>
-          <th style="padding:6px 8px;border:1px solid var(--border);color:var(--accent);">אימונים</th>
-        </tr>
-      </thead>
+    <table style="border-collapse:collapse;width:100%;font-size:13px;">
+      <thead><tr style="background:#fafafa;">
+        <th style="padding:7px 9px;border-bottom:2px solid var(--border);color:var(--accent);text-align:right;">שבוע</th>
+        <th style="padding:7px 9px;border-bottom:2px solid var(--border);color:var(--accent);text-align:right;">תאריכים</th>
+        <th style="padding:7px 9px;border-bottom:2px solid var(--border);color:var(--accent);text-align:right;">אימונים</th>
+      </tr></thead>
       <tbody id="aerobicTableBody"><tr><td colspan="3" style="padding:12px;text-align:center;color:var(--muted);">טוען...</td></tr></tbody>
     </table>
   </div>
@@ -548,30 +343,20 @@
     <div class="card-title">📥 ייצוא לאקסל</div>
     <button class="btn btn-primary" onclick="exportToCSV()">📥 ייצא לאקסל (XLSX)</button>
   </div>
-
 </div>
 
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <button class="nav-item active" onclick="showPage('daily'); setNavActive(this)">
-    <span class="nav-icon">📅</span>יומי
-  </button>
-  <button class="nav-item" onclick="showPage('aerobic'); setNavActive(this)">
-    <span class="nav-icon">🏃</span>אירובי
-  </button>
-  <button class="nav-item" onclick="showPage('initial'); setNavActive(this)">
-    <span class="nav-icon">📏</span>מדדים
-  </button>
-  <button class="nav-item" onclick="showPage('rules'); setNavActive(this)">
-    <span class="nav-icon">📜</span>חוקים
-  </button>
-  <button class="nav-item" onclick="showPage('export'); setNavActive(this)">
-    <span class="nav-icon">📊</span>נתונים
-  </button>
+  <button class="nav-item active" onclick="showPage('daily'); setNavActive(this)"><span class="nav-icon">📅</span>יומי</button>
+  <button class="nav-item" onclick="showPage('aerobic'); setNavActive(this)"><span class="nav-icon">🏃</span>אירובי</button>
+  <button class="nav-item" onclick="showPage('initial'); setNavActive(this)"><span class="nav-icon">📏</span>מדדים</button>
+  <button class="nav-item" onclick="showPage('rules'); setNavActive(this)"><span class="nav-icon">📜</span>חוקים</button>
+  <button class="nav-item" onclick="showPage('export'); setNavActive(this)"><span class="nav-icon">📊</span>נתונים</button>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAY9ABzk6iCSUAL_jyQjeQLJJSHFqZ6hxk",
@@ -595,21 +380,20 @@ let currentDate = new Date();
 if (currentDate < START_DATE) currentDate = new Date(START_DATE);
 if (currentDate > END_DATE) currentDate = new Date(END_DATE);
 
-function dateKey(d) { return d.toISOString().split('T')[0]; }
-
-function formatDate(d) {
-  const day = HEB_DAYS[d.getDay()];
-  return `${day}, ${d.getDate()} ב${HEB_MONTHS[d.getMonth()]}`;
+function dateKey(d) {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
-function formatShort(d) {
-  return `${d.getDate()}/${d.getMonth()+1}`;
-}
+function formatDate(d) { return `${HEB_DAYS[d.getDay()]}, ${d.getDate()} ב${HEB_MONTHS[d.getMonth()]}`; }
+function formatShort(d) { return `${d.getDate()}/${d.getMonth()+1}`; }
 
 function updateDateDisplays() {
   const fmt = formatDate(currentDate);
-  const el1 = document.getElementById('currentDateDisplay');
-  if (el1) el1.textContent = fmt;
+  const el = document.getElementById('currentDateDisplay');
+  if (el) el.textContent = fmt;
   document.getElementById('headerDate').textContent = fmt;
 }
 
@@ -637,10 +421,7 @@ window.saveDaily = async function() {
     successesSent: document.getElementById('successesSent').checked,
     updatedAt: new Date().toISOString()
   };
-  try {
-    await setDoc(doc(db, 'daily', key), data);
-    showToast('נשמר! ✓');
-  } catch(e) { console.error(e); }
+  try { await setDoc(doc(db, 'daily', key), data); showToast('נשמר! ✓'); } catch(e) { console.error(e); }
 };
 
 async function loadDaily() {
@@ -661,11 +442,12 @@ async function loadDaily() {
 }
 
 // ---- INITIAL ----
+let initData = {};
+let latestMeasure = null;
+
 window.saveInitial = async function() {
   const weight = parseFloat(document.getElementById('initWeight').value);
-  if (weight) {
-    document.getElementById('initTargetWeight').value = (weight - 9).toFixed(1);
-  }
+  if (weight) document.getElementById('initTargetWeight').value = (weight - 9).toFixed(1);
   const data = {
     weight: document.getElementById('initWeight').value,
     chest: document.getElementById('initChest').value,
@@ -686,8 +468,10 @@ window.saveInitial = async function() {
   };
   try {
     await setDoc(doc(db, 'meta', 'initial'), data);
+    initData = data;
     document.getElementById('saveInitialStatus').textContent = '✓ נשמר בהצלחה';
     setTimeout(() => document.getElementById('saveInitialStatus').textContent = '', 2000);
+    renderMeasureChart();
   } catch(e) { console.error(e); }
 };
 
@@ -696,6 +480,7 @@ async function loadInitial() {
     const snap = await getDoc(doc(db, 'meta', 'initial'));
     if (!snap.exists()) return;
     const d = snap.data();
+    initData = d;
     document.getElementById('initWeight').value = d.weight || '';
     document.getElementById('initChest').value = d.chest || '';
     document.getElementById('initWaist').value = d.waist || '';
@@ -712,10 +497,90 @@ async function loadInitial() {
     document.getElementById('initDareGoal').value = d.dareGoal || '';
     document.getElementById('initObstacles').value = d.obstacles || '';
     document.getElementById('initDaring').value = d.daring || '';
-    if (d.weight) {
-      document.getElementById('initTargetWeight').value = (parseFloat(d.weight) - 9).toFixed(1);
-    }
+    if (d.weight) document.getElementById('initTargetWeight').value = (parseFloat(d.weight) - 9).toFixed(1);
   } catch(e) { console.error(e); }
+
+  // Load latest measure
+  try {
+    const snap = await getDocs(query(collection(db, 'measures'), orderBy('date', 'desc')));
+    if (!snap.empty) latestMeasure = snap.docs[0].data();
+  } catch(e) {}
+
+  renderMeasureChart();
+}
+
+// ---- MEASURE FORM ----
+window.toggleMeasureForm = function() {
+  const form = document.getElementById('measureForm');
+  const isHidden = form.style.display === 'none';
+  form.style.display = isHidden ? 'block' : 'none';
+  if (isHidden) {
+    const today = new Date();
+    document.getElementById('measureFormDate').textContent = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+  }
+};
+
+window.saveNewMeasure = async function() {
+  const today = new Date();
+  const data = {
+    date: dateKey(today),
+    chest: document.getElementById('newChest').value,
+    waist: document.getElementById('newWaist').value,
+    hips: document.getElementById('newHips').value,
+    arm: document.getElementById('newArm').value,
+    thigh: document.getElementById('newThigh').value,
+  };
+  try {
+    await addDoc(collection(db, 'measures'), data);
+    latestMeasure = data;
+    showToast('מדידה נשמרה! ✓');
+    document.getElementById('measureForm').style.display = 'none';
+    ['newChest','newWaist','newHips','newArm','newThigh'].forEach(id => document.getElementById(id).value = '');
+    renderMeasureChart();
+  } catch(e) { console.error(e); showToast('שגיאה בשמירה'); }
+};
+
+function renderMeasureChart() {
+  const container = document.getElementById('measureChart');
+  const legend = document.getElementById('measureLegend');
+  const measures = [
+    { label: 'חזה', initKey: 'chest', nowKey: 'chest' },
+    { label: 'מותן', initKey: 'waist', nowKey: 'waist' },
+    { label: 'אגן', initKey: 'hips', nowKey: 'hips' },
+    { label: 'זרוע', initKey: 'arm', nowKey: 'arm' },
+    { label: 'ירך', initKey: 'thigh', nowKey: 'thigh' },
+  ];
+
+  const hasInit = measures.some(m => initData[m.initKey]);
+  if (!hasInit) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:0.82rem;">מלא את המדדים הראשוניים כדי לראות את הגרף</p>';
+    legend.style.display = 'none';
+    return;
+  }
+
+  legend.style.display = 'flex';
+  let html = '';
+  measures.forEach(m => {
+    const initVal = parseFloat(initData[m.initKey]);
+    const nowVal = latestMeasure ? parseFloat(latestMeasure[m.nowKey]) : null;
+    if (!initVal) return;
+
+    const maxVal = Math.max(initVal, nowVal || initVal);
+    const initPct = 100;
+    const nowPct = nowVal ? Math.round((nowVal / initVal) * 100) : null;
+    const diff = nowVal ? (nowVal - initVal).toFixed(1) : null;
+    const diffColor = diff && parseFloat(diff) < 0 ? '#2a9d2a' : '#e74c3c';
+    const diffText = diff ? `<span style="color:${diffColor};font-weight:700;">${parseFloat(diff) > 0 ? '+' : ''}${diff} ס"מ</span>` : '';
+
+    html += `<div class="measure-bar-wrap">
+      <div class="measure-bar-label"><span>${m.label} — ${initVal} ס"מ${nowVal ? ` ← ${nowVal} ס"מ` : ''}</span>${diffText}</div>
+      <div class="measure-bar-track">
+        <div class="measure-bar-start" style="width:${initPct}%"></div>
+        ${nowPct !== null ? `<div class="measure-bar-now" style="width:${nowPct}%"></div>` : ''}
+      </div>
+    </div>`;
+  });
+  container.innerHTML = html;
 }
 
 // ---- AEROBIC ----
@@ -723,172 +588,58 @@ async function buildAerobicWeeks() {
   const container = document.getElementById('aerobicWeeks');
   container.innerHTML = '<div class="loading">טוען...</div>';
   let aerobicData = {};
-  try {
-    const snap = await getDocs(collection(db, 'aerobic'));
-    snap.forEach(d => { aerobicData[d.id] = d.data(); });
-  } catch(e) {}
-
+  try { const snap = await getDocs(collection(db, 'aerobic')); snap.forEach(d => { aerobicData[d.id] = d.data(); }); } catch(e) {}
   container.innerHTML = '';
   let d = new Date(START_DATE);
   let weekNum = 1;
-
   while (d <= END_DATE) {
     const weekStart = new Date(d);
-    const weekEnd = new Date(weekStart);
-    weekEnd.setDate(weekEnd.getDate() + 6);
-
-    const weekDiv = document.createElement('div');
-    weekDiv.style.marginBottom = '16px';
+    const weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate() + 6);
+    const weekDiv = document.createElement('div'); weekDiv.style.marginBottom = '16px';
     weekDiv.innerHTML = `<div class="section-divider">שבוע ${weekNum} — ${formatShort(weekStart)} עד ${formatShort(weekEnd)}</div>`;
-
-    const grid = document.createElement('div');
-    grid.className = 'week-grid';
-
+    const grid = document.createElement('div'); grid.className = 'week-grid';
     for (let i = 0; i < 7; i++) {
-      const day = new Date(weekStart);
-      day.setDate(day.getDate() + i);
+      const day = new Date(weekStart); day.setDate(day.getDate() + i);
       if (day > END_DATE) { grid.appendChild(document.createElement('div')); continue; }
-
       const key = dateKey(day);
       const isDone = aerobicData[key]?.done || false;
       const isToday = dateKey(day) === dateKey(new Date());
-
       const cell = document.createElement('div');
       cell.className = `day-cell${isDone ? ' done' : ''}${isToday ? ' today' : ''}`;
       cell.innerHTML = `<div>${HEB_DAYS[day.getDay()].slice(0,2)}</div><div style="font-size:0.8rem;font-weight:700">${day.getDate()}</div><div style="margin-top:2px">${isDone ? '✓' : '·'}</div>`;
       cell.onclick = async () => {
-        const newVal = !isDone;
-        aerobicData[key] = { done: newVal };
-        try {
-          await setDoc(doc(db, 'aerobic', key), { done: newVal });
-          showToast(newVal ? 'אימון סומן! 💪' : 'סימון הוסר');
-          buildAerobicWeeks();
-        } catch(e) {}
+        const newVal = !isDone; aerobicData[key] = { done: newVal };
+        try { await setDoc(doc(db, 'aerobic', key), { done: newVal }); showToast(newVal ? 'אימון סומן! 💪' : 'סימון הוסר'); buildAerobicWeeks(); } catch(e) {}
       };
       grid.appendChild(cell);
     }
-
-    weekDiv.appendChild(grid);
-    container.appendChild(weekDiv);
-    d.setDate(d.getDate() + 7);
-    weekNum++;
+    weekDiv.appendChild(grid); container.appendChild(weekDiv);
+    d.setDate(d.getDate() + 7); weekNum++;
   }
 }
-
-// ---- EXPORT XLSX ----
-window.exportToCSV = async function() {
-  showToast('מייצא...');
-  try {
-    // Load SheetJS dynamically
-    if (!window.XLSX) {
-      await new Promise((res, rej) => {
-        const s = document.createElement('script');
-        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-        s.onload = res; s.onerror = rej;
-        document.head.appendChild(s);
-      });
-    }
-
-    const snap = await getDocs(collection(db, 'daily'));
-    const aerobicSnap = await getDocs(collection(db, 'aerobic'));
-
-    const daily = {};
-    snap.forEach(d => { daily[d.id] = d.data(); });
-    const aerobic = {};
-    aerobicSnap.forEach(d => { aerobic[d.id] = d.data(); });
-
-    const todayKey = dateKey(new Date());
-
-    const headers = [
-      'תאריך','יום','משקל בוקר','משקל ערב',
-      'כוח בוקר','כוח ערב','אירובי',
-      'האם שתית לפחות 1.5 ליטר מים?',
-      'דמיינתי 3 דקות איך ארצה להיראות',
-      'כל פעם ביס ושאלה',
-      'נמנעתי מקמח ואלכוהול',
-      'שלחתי הצלחות למאמנת'
-    ];
-
-    const rows = [headers];
-
-    let d = new Date(START_DATE);
-    while (d <= END_DATE) {
-      const key = dateKey(d);
-      const isPast = key <= todayKey;
-      const day = daily[key] || {};
-      const hasData = isPast && Object.keys(day).filter(k => k !== 'updatedAt').length > 0;
-
-      const yn = (val) => hasData ? (val ? 'כן' : 'לא') : '';
-      const aerobicVal = isPast ? (aerobic[key]?.done ? 'כן' : (hasData ? 'לא' : '')) : '';
-
-      rows.push([
-        `${d.getDate()}/${d.getMonth()+1}`,
-        HEB_DAYS[d.getDay()],
-        isPast ? (day.weightMorning || '') : '',
-        isPast ? (day.weightEvening || '') : '',
-        yn(day.strengthMorning),
-        yn(day.strengthEvening),
-        aerobicVal,
-        yn(day.water),
-        yn(day.visualization),
-        yn(day.nutritionMethod),
-        yn(day.nutritionAvoid),
-        yn(day.successesSent),
-      ]);
-
-      d.setDate(d.getDate() + 1);
-    }
-
-    const ws = XLSX.utils.aoa_to_sheet(rows);
-
-    // Auto column width based on header length
-    ws['!cols'] = headers.map(h => ({ wch: Math.max(h.length + 2, 10) }));
-
-    // RTL direction
-    ws['!sheetViews'] = [{ rightToLeft: true }];
-
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'האאוטפיט של נב');
-
-    // Force RTL by patching the sheet XML after writing
-    ws['!sheetViews'] = [{ rightToLeft: true }];
-    wb.Workbook = { Views: [{ RTL: true }] };
-
-    XLSX.writeFile(wb, `nevs-outfit-${dateKey(new Date())}.xlsx`);
-    showToast('יוצא! ✓');
-  } catch(e) { console.error(e); showToast('שגיאה בייצוא'); }
-};
-
-window.copyTrainerLink = function() {
-  navigator.clipboard.writeText(window.location.href).then(() => showToast('הקישור הועתק! ✓'));
-};
 
 // ---- DATA PAGE ----
 let chartView = 'days';
 let allDailyData = {};
 let allAerobicData = {};
+let selectedPoint = null;
 
 window.setChartView = function(view) {
   chartView = view;
-  ['days','weeks','months'].forEach(v => {
-    const btn = document.getElementById('view' + v.charAt(0).toUpperCase() + v.slice(1));
-    if (btn) { btn.style.background = v === view ? 'var(--accent)' : 'var(--bg3)'; btn.style.color = v === view ? '#000' : 'var(--muted)'; btn.style.fontWeight = v === view ? '700' : '400'; }
+  selectedPoint = null;
+  ['Days','Weeks','Months'].forEach(v => {
+    const btn = document.getElementById('view' + v);
+    if (btn) { btn.classList.toggle('active', v.toLowerCase() === view); }
   });
   drawChart();
 };
 
 async function loadDataPage() {
   try {
-    const snap = await getDocs(collection(db, 'daily'));
-    allDailyData = {};
-    snap.forEach(d => { allDailyData[d.id] = d.data(); });
-    const aerobicSnap = await getDocs(collection(db, 'aerobic'));
-    allAerobicData = {};
-    aerobicSnap.forEach(d => { allAerobicData[d.id] = d.data(); });
+    const snap = await getDocs(collection(db, 'daily')); allDailyData = {}; snap.forEach(d => { allDailyData[d.id] = d.data(); });
+    const aerobicSnap = await getDocs(collection(db, 'aerobic')); allAerobicData = {}; aerobicSnap.forEach(d => { allAerobicData[d.id] = d.data(); });
   } catch(e) { console.error(e); }
-
   buildMainTable();
-  buildWeightTable();
   drawChart();
   buildAerobicTable();
 }
@@ -898,64 +649,41 @@ function buildMainTable() {
   if (!tbody) return;
   const todayKey = dateKey(new Date());
   let rows = '';
-  let d = new Date(START_DATE);
   let alt = false;
+  let d = new Date(START_DATE);
+  // Collect all past rows, show newest first
+  const allRows = [];
   while (d <= END_DATE) {
     const key = dateKey(d);
     if (key > todayKey) { d.setDate(d.getDate()+1); continue; }
     const day = allDailyData[key] || {};
     const hasData = Object.keys(day).filter(k => k !== 'updatedAt').length > 0;
-    const bg = alt ? 'background:var(--bg3);' : '';
     const yn = (val) => hasData ? (val ? `<span style="color:var(--green)">✓</span>` : `<span style="color:var(--red)">✗</span>`) : '';
     const aerobic = allAerobicData[key]?.done ? `<span style="color:var(--green)">✓</span>` : (hasData ? `<span style="color:var(--red)">✗</span>` : '');
-    rows += `<tr style="${bg}">
-      <td style="padding:5px 8px;border:1px solid var(--border);">${d.getDate()}/${d.getMonth()+1}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);">${HEB_DAYS[d.getDay()]}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);">${day.weightMorning||''}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);">${day.weightEvening||''}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.strengthMorning)}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.strengthEvening)}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${aerobic}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.water)}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.visualization)}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.nutritionMethod)}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.nutritionAvoid)}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);text-align:center;">${yn(day.successesSent)}</td>
-    </tr>`;
-    alt = !alt;
-    d.setDate(d.getDate() + 1);
-  }
-  tbody.innerHTML = rows || `<tr><td colspan="12" style="padding:12px;text-align:center;color:var(--muted);">אין נתונים עדיין</td></tr>`;
-}
-
-function buildWeightTable() {
-  const tbody = document.getElementById('weightTableBody');
-  if (!tbody) return;
-  // Update header - remove diff column
-  const thead = document.querySelector('#weightTable thead tr');
-  if (thead && thead.children.length === 4) thead.removeChild(thead.lastElementChild);
-  const todayKey = dateKey(new Date());
-  let rows = '';
-  let alt = false;
-  let d = new Date(START_DATE);
-  while (d <= END_DATE) {
-    const key = dateKey(d);
-    if (key > todayKey) { d.setDate(d.getDate()+1); continue; }
-    const day = allDailyData[key] || {};
-    if (!day.weightMorning && !day.weightEvening) { d.setDate(d.getDate()+1); alt=!alt; continue; }
-    const bg = alt ? 'background:var(--bg3);' : '';
-    rows += `<tr style="${bg}">
-      <td style="padding:5px 8px;border:1px solid var(--border);">${d.getDate()}/${d.getMonth()+1}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);">${day.weightMorning||''}</td>
-      <td style="padding:5px 8px;border:1px solid var(--border);">${day.weightEvening||''}</td>
-    </tr>`;
-    alt = !alt;
+    allRows.push({ d: new Date(d), key, day, hasData, yn, aerobic });
     d.setDate(d.getDate()+1);
   }
-  tbody.innerHTML = rows || `<tr><td colspan="3" style="padding:12px;text-align:center;color:var(--muted);">אין נתוני משקל עדיין</td></tr>`;
+  // Reverse: newest first
+  allRows.reverse();
+  allRows.forEach((r, idx) => {
+    const bg = idx % 2 === 1 ? 'background:#fafafa;' : '';
+    rows += `<tr style="${bg}">
+      <td>${r.d.getDate()}/${r.d.getMonth()+1}</td>
+      <td>${HEB_DAYS[r.d.getDay()]}</td>
+      <td>${r.day.weightMorning||''}</td>
+      <td>${r.day.weightEvening||''}</td>
+      <td style="text-align:center">${r.yn(r.day.strengthMorning)}</td>
+      <td style="text-align:center">${r.yn(r.day.strengthEvening)}</td>
+      <td style="text-align:center">${r.aerobic}</td>
+      <td style="text-align:center">${r.yn(r.day.water)}</td>
+      <td style="text-align:center">${r.yn(r.day.visualization)}</td>
+      <td style="text-align:center">${r.yn(r.day.nutritionMethod)}</td>
+      <td style="text-align:center">${r.yn(r.day.nutritionAvoid)}</td>
+      <td style="text-align:center">${r.yn(r.day.successesSent)}</td>
+    </tr>`;
+  });
+  tbody.innerHTML = rows || `<tr><td colspan="12" style="padding:16px;text-align:center;color:var(--muted);">אין נתונים עדיין</td></tr>`;
 }
-
-let selectedPoint = null;
 
 function drawChart() {
   const canvas = document.getElementById('weightChart');
@@ -970,19 +698,17 @@ function drawChart() {
       const key = dateKey(d);
       if (key <= todayKey) {
         const day = allDailyData[key] || {};
-        points.push({ label: `${d.getDate()}/${d.getMonth()+1}`, val: day.weightMorning ? parseFloat(day.weightMorning) : null });
+        points.push({ label: formatShort(d), val: day.weightMorning ? parseFloat(day.weightMorning) : null });
       }
       d.setDate(d.getDate()+1);
     }
   } else if (chartView === 'weeks') {
     let d = new Date(START_DATE);
     let w = 1;
-    // Show weeks up to current week + 1
     const nextWeekEnd = new Date();
     nextWeekEnd.setDate(nextWeekEnd.getDate() + (7 - nextWeekEnd.getDay()) + 7);
     while (d <= END_DATE && d <= nextWeekEnd) {
       const weekEnd = new Date(d); weekEnd.setDate(weekEnd.getDate()+6);
-      const label = `ש${w}`;
       let vals = [];
       let dd = new Date(d);
       while (dd <= weekEnd && dd <= END_DATE) {
@@ -990,7 +716,7 @@ function drawChart() {
         if (key <= todayKey && allDailyData[key]?.weightMorning) vals.push(parseFloat(allDailyData[key].weightMorning));
         dd.setDate(dd.getDate()+1);
       }
-      points.push({ label, val: vals.length ? parseFloat((vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1)) : null });
+      points.push({ label: `ש${w}`, val: vals.length ? parseFloat((vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1)) : null });
       d.setDate(d.getDate()+7); w++;
     }
   } else {
@@ -1013,23 +739,21 @@ function drawChart() {
 
   const validVals = points.filter(p => p.val !== null).map(p => p.val);
   if (validVals.length === 0) {
-    canvas.width = 300; canvas.height = 160;
+    canvas.width = 300; canvas.height = 240;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#7a7f9a'; ctx.font = '12px Heebo'; ctx.textAlign = 'center';
-    ctx.fillText('אין נתוני משקל עדיין', 150, 80);
-    yAxisEl.innerHTML = '';
-    canvas.onclick = null;
-    return;
+    ctx.fillStyle = '#aaa'; ctx.font = '13px Heebo'; ctx.textAlign = 'center';
+    ctx.fillText('אין נתוני משקל עדיין', 150, 120);
+    yAxisEl.innerHTML = ''; canvas.onclick = null; return;
   }
 
   const minVal = Math.floor(Math.min(...validVals) - 0.5);
   const maxVal = Math.ceil(Math.max(...validVals) + 0.5);
-  const colW = chartView === 'days' ? 40 : chartView === 'weeks' ? 55 : 80;
-  const totalW = Math.max(points.length * colW, 300);
-  const totalH = 160;
+  const colW = chartView === 'days' ? 44 : chartView === 'weeks' ? 60 : 90;
+  const totalW = Math.max(points.length * colW, 320);
+  const totalH = 240;
   canvas.width = totalW; canvas.height = totalH;
   const ctx = canvas.getContext('2d');
-  const padTop = 15, padBot = 32, padLeft = 5, padRight = 10;
+  const padTop = 20, padBot = 36, padLeft = 6, padRight = 12;
   const chartH = totalH - padTop - padBot;
   const chartW = totalW - padLeft - padRight;
 
@@ -1038,13 +762,12 @@ function drawChart() {
   const steps = maxVal - minVal;
   for (let i = 0; i <= steps; i++) {
     const y = padTop + (i / steps) * chartH;
-    ctx.strokeStyle = '#2a2d45'; ctx.lineWidth = 0.5; ctx.setLineDash([3,3]);
+    ctx.strokeStyle = i === steps ? '#ccc' : '#f0f0f0';
+    ctx.lineWidth = i === steps ? 1 : 0.7;
+    ctx.setLineDash(i === steps ? [] : [4,4]);
     ctx.beginPath(); ctx.moveTo(padLeft, y); ctx.lineTo(totalW - padRight, y); ctx.stroke();
   }
   ctx.setLineDash([]);
-
-  ctx.strokeStyle = '#2a2d45'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(padLeft, padTop + chartH); ctx.lineTo(totalW - padRight, padTop + chartH); ctx.stroke();
 
   const getY = val => padTop + ((maxVal - val) / (maxVal - minVal)) * chartH;
   const getX = i => padLeft + (i + 0.5) * (chartW / points.length);
@@ -1055,10 +778,10 @@ function drawChart() {
   points.forEach((p, i) => {
     if (p.val === null) return;
     const x = getX(i), y = getY(p.val);
-    linePoints.push({x, y, val: p.val, label: p.label, idx: i});
+    linePoints.push({ x, y, val: p.val, label: p.label, idx: i });
     if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
   });
-  ctx.strokeStyle = '#f0a500'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.strokeStyle = '#1a73e8'; ctx.lineWidth = 2.5; ctx.stroke();
 
   if (linePoints.length >= 2) {
     ctx.beginPath();
@@ -1066,46 +789,35 @@ function drawChart() {
     linePoints.forEach(p => ctx.lineTo(p.x, p.y));
     ctx.lineTo(linePoints[linePoints.length-1].x, padTop + chartH);
     ctx.lineTo(linePoints[0].x, padTop + chartH);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(240,165,0,0.08)'; ctx.fill();
+    ctx.closePath(); ctx.fillStyle = 'rgba(26,115,232,0.07)'; ctx.fill();
   }
 
-  // X labels - bigger font
-  ctx.fillStyle = '#7a7f9a'; ctx.font = '11px Heebo'; ctx.textAlign = 'center';
+  ctx.fillStyle = '#888'; ctx.font = '11px Heebo'; ctx.textAlign = 'center';
   points.forEach((p, i) => { ctx.fillText(p.label, getX(i), totalH - 10); });
 
-  // Y axis labels - bigger font
   let yHTML = '';
-  for (let i = 0; i <= steps; i++) {
-    yHTML += `<span style="font-size:11px">${maxVal - i}</span>`;
-  }
+  for (let i = 0; i <= steps; i++) { yHTML += `<span>${maxVal - i}</span>`; }
   yAxisEl.innerHTML = yHTML;
 
   function renderDots(sel) {
     linePoints.forEach(p => {
-      const isSelected = sel && sel.idx === p.idx;
-      ctx.beginPath(); ctx.arc(p.x, p.y, isSelected ? 5 : 3, 0, Math.PI*2);
-      ctx.fillStyle = isSelected ? '#fff' : '#f0a500';
-      ctx.strokeStyle = '#f0a500'; ctx.lineWidth = 2;
-      if (isSelected) ctx.stroke(); else ctx.fill();
-      ctx.beginPath(); ctx.arc(p.x, p.y, isSelected ? 5 : 3, 0, Math.PI*2);
-      if (isSelected) { ctx.fillStyle = '#f0a500'; ctx.fill(); }
+      const isSel = sel && sel.idx === p.idx;
+      ctx.beginPath(); ctx.arc(p.x, p.y, isSel ? 6 : 4, 0, Math.PI*2);
+      if (isSel) { ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#1a73e8'; ctx.lineWidth = 2.5; ctx.stroke(); }
+      else { ctx.fillStyle = '#1a73e8'; ctx.fill(); }
     });
-
-    // Tooltip for selected
     if (sel) {
-      const tx = sel.x, ty = sel.y;
       const text = `${sel.val}`;
-      ctx.font = 'bold 11px Heebo';
-      const tw = ctx.measureText(text).width + 12;
-      let bx = tx - tw/2, by = ty - 28;
+      ctx.font = 'bold 12px Heebo';
+      const tw = ctx.measureText(text).width + 14;
+      let bx = sel.x - tw/2, by = sel.y - 30;
       if (bx < 2) bx = 2;
       if (bx + tw > totalW - 2) bx = totalW - tw - 2;
-      if (by < 2) by = ty + 10;
-      ctx.fillStyle = '#f0a500'; ctx.beginPath();
-      ctx.roundRect(bx, by, tw, 20, 4); ctx.fill();
-      ctx.fillStyle = '#000'; ctx.textAlign = 'right';
-      ctx.fillText(text, bx + tw - 6, by + 14);
+      if (by < 4) by = sel.y + 12;
+      ctx.fillStyle = '#1a73e8'; ctx.beginPath();
+      ctx.roundRect(bx, by, tw, 22, 5); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+      ctx.fillText(text, bx + tw/2, by + 15);
     }
   }
 
@@ -1116,33 +828,31 @@ function drawChart() {
     const scaleX = canvas.width / rect.width;
     const mx = (e.clientX - rect.left) * scaleX;
     const my = (e.clientY - rect.top) * (canvas.height / rect.height);
-    let closest = null, minDist = 20;
+    let closest = null, minDist = 25;
     linePoints.forEach(p => {
       const dist = Math.sqrt((mx-p.x)**2 + (my-p.y)**2);
       if (dist < minDist) { minDist = dist; closest = p; }
     });
     selectedPoint = (closest && (!selectedPoint || selectedPoint.idx !== closest.idx)) ? closest : null;
     ctx.clearRect(0, 0, totalW, totalH);
-    // Redraw everything
     for (let i = 0; i <= steps; i++) {
       const y = padTop + (i / steps) * chartH;
-      ctx.strokeStyle = '#2a2d45'; ctx.lineWidth = 0.5; ctx.setLineDash([3,3]);
+      ctx.strokeStyle = i === steps ? '#ccc' : '#f0f0f0'; ctx.lineWidth = i === steps ? 1 : 0.7;
+      ctx.setLineDash(i === steps ? [] : [4,4]);
       ctx.beginPath(); ctx.moveTo(padLeft, y); ctx.lineTo(totalW - padRight, y); ctx.stroke();
     }
     ctx.setLineDash([]);
-    ctx.strokeStyle = '#2a2d45'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(padLeft, padTop + chartH); ctx.lineTo(totalW - padRight, padTop + chartH); ctx.stroke();
     ctx.beginPath(); started = false;
     linePoints.forEach(p => { if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); });
-    ctx.strokeStyle = '#f0a500'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.strokeStyle = '#1a73e8'; ctx.lineWidth = 2.5; ctx.stroke();
     if (linePoints.length >= 2) {
       ctx.beginPath(); ctx.moveTo(linePoints[0].x, linePoints[0].y);
       linePoints.forEach(p => ctx.lineTo(p.x, p.y));
       ctx.lineTo(linePoints[linePoints.length-1].x, padTop + chartH);
       ctx.lineTo(linePoints[0].x, padTop + chartH);
-      ctx.closePath(); ctx.fillStyle = 'rgba(240,165,0,0.08)'; ctx.fill();
+      ctx.closePath(); ctx.fillStyle = 'rgba(26,115,232,0.07)'; ctx.fill();
     }
-    ctx.fillStyle = '#7a7f9a'; ctx.font = '11px Heebo'; ctx.textAlign = 'center';
+    ctx.fillStyle = '#888'; ctx.font = '11px Heebo'; ctx.textAlign = 'center';
     points.forEach((p, i) => { ctx.fillText(p.label, getX(i), totalH - 10); });
     renderDots(selectedPoint);
   };
@@ -1152,11 +862,7 @@ function buildAerobicTable() {
   const tbody = document.getElementById('aerobicTableBody');
   if (!tbody) return;
   const todayKey = dateKey(new Date());
-  let rows = '';
-  let d = new Date(START_DATE);
-  let w = 1;
-  let alt = false;
-
+  let rows = ''; let d = new Date(START_DATE); let w = 1; let alt = false;
   while (d <= END_DATE) {
     const weekStart = new Date(d);
     const weekEnd = new Date(d); weekEnd.setDate(weekEnd.getDate()+6);
@@ -1167,38 +873,66 @@ function buildAerobicTable() {
       if (key <= todayKey && allAerobicData[key]?.done) count++;
       dd.setDate(dd.getDate()+1);
     }
-    const bg = alt ? 'background:var(--bg3);' : '';
-    let badge = '';
-    if (count === 0) badge = `<span style="color:var(--muted)">—</span>`;
-    else if (count === 1) badge = `1 👍`;
-    else if (count === 2) badge = `2 👏`;
-    else if (count === 3) badge = `3 💪 תותח על!`;
-    else badge = `${count} 👑 מלך!`;
-
-    rows += `<tr style="${bg}">
-      <td style="padding:6px 8px;border:1px solid var(--border);">שבוע ${w}</td>
-      <td style="padding:6px 8px;border:1px solid var(--border);color:var(--muted);font-size:11px;">${weekStart.getDate()}/${weekStart.getMonth()+1}–${Math.min(weekEnd.getDate(), new Date(END_DATE).getDate())}/${weekEnd.getMonth()+1}</td>
-      <td style="padding:6px 8px;border:1px solid var(--border);">${badge}</td>
-    </tr>`;
-    d.setDate(d.getDate()+7);
-    w++; alt = !alt;
+    const bg = alt ? 'background:#fafafa;' : '';
+    let badge = count === 0 ? `<span style="color:#bbb">—</span>` : count === 1 ? `1 👍` : count === 2 ? `2 👏` : count === 3 ? `3 💪 תותח על!` : `${count} 👑 מלך!`;
+    rows += `<tr style="${bg}"><td style="padding:7px 9px;border-bottom:1px solid #f5f5f5;">שבוע ${w}</td><td style="padding:7px 9px;border-bottom:1px solid #f5f5f5;color:var(--muted);font-size:12px;">${formatShort(weekStart)}–${formatShort(weekEnd)}</td><td style="padding:7px 9px;border-bottom:1px solid #f5f5f5;">${badge}</td></tr>`;
+    d.setDate(d.getDate()+7); w++; alt = !alt;
   }
   tbody.innerHTML = rows;
 }
 
+// ---- EXPORT ----
+window.exportToCSV = async function() {
+  showToast('מייצא...');
+  try {
+    if (!window.XLSX) {
+      await new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+        s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+    const snap = await getDocs(collection(db, 'daily'));
+    const aerobicSnap = await getDocs(collection(db, 'aerobic'));
+    const daily = {}; snap.forEach(d => { daily[d.id] = d.data(); });
+    const aerobic = {}; aerobicSnap.forEach(d => { aerobic[d.id] = d.data(); });
+    const todayKey = dateKey(new Date());
+    const headers = ['תאריך','יום','משקל בוקר','משקל ערב','כוח בוקר','כוח ערב','אירובי','האם שתית לפחות 1.5 ליטר מים?','דמיינתי 3 דקות איך ארצה להיראות','כל פעם ביס ושאלה','נמנעתי מקמח ואלכוהול','שלחתי הצלחות למאמנת'];
+    const rows = [headers];
+    let d = new Date(START_DATE);
+    while (d <= END_DATE) {
+      const key = dateKey(d);
+      const isPast = key <= todayKey;
+      const day = daily[key] || {};
+      const hasData = isPast && Object.keys(day).filter(k => k !== 'updatedAt').length > 0;
+      const yn = (val) => hasData ? (val ? 'כן' : 'לא') : '';
+      rows.push([`${d.getDate()}/${d.getMonth()+1}`, HEB_DAYS[d.getDay()], isPast ? (day.weightMorning||'') : '', isPast ? (day.weightEvening||'') : '', yn(day.strengthMorning), yn(day.strengthEvening), isPast ? (aerobic[key]?.done ? 'כן' : (hasData ? 'לא' : '')) : '', yn(day.water), yn(day.visualization), yn(day.nutritionMethod), yn(day.nutritionAvoid), yn(day.successesSent)]);
+      d.setDate(d.getDate()+1);
+    }
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    ws['!cols'] = headers.map(h => ({ wch: Math.max(h.length + 2, 10) }));
+    ws['!sheetViews'] = [{ rightToLeft: true }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'האאוטפיט של נב');
+    wb.Workbook = { Views: [{ RTL: true }] };
+    XLSX.writeFile(wb, `nevs-outfit-${dateKey(new Date())}.xlsx`);
+    showToast('יוצא! ✓');
+  } catch(e) { console.error(e); showToast('שגיאה בייצוא'); }
+};
+
 window.showToast = function(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2000);
 };
 
 window.showPage = function(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   if (name === 'aerobic') buildAerobicWeeks();
   if (name === 'export') loadDataPage();
+  if (name === 'initial') { loadInitial(); }
 };
 
 window.setNavActive = function(el) {
@@ -1206,11 +940,9 @@ window.setNavActive = function(el) {
   el.classList.add('active');
 };
 
-// ---- INIT ----
 updateDateDisplays();
 loadDaily();
 loadInitial();
-
 </script>
 </body>
 </html>
